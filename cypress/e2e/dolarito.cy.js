@@ -5,6 +5,27 @@ const limpiarPrecio = (texto) => {
     return Number(numero)
 }
 
+// Función para extraer precio de un contenedor
+const extraerPrecio = ($container) => {
+    const todosLosTextos = []
+
+    $container.find('*').each((i, el) => {
+        const texto = $(el).text().trim()
+        // Solo elementos con texto corto que puedan ser precios
+        if (texto.length > 0 && texto.length < 15) {
+            todosLosTextos.push(texto)
+        }
+    })
+
+    // Buscar patrones de precio
+    const precios = todosLosTextos.filter(t =>
+        /^\$?\s*\d{1,2}[.,]\d{3}/.test(t) || // $1.470 o 1.470
+        /^\d{3,4}$/.test(t) // 1470
+    )
+
+    return precios.length > 0 ? precios[0] : null
+}
+
 describe('Validar diferencia entre dólar blue y euro blue', () => {
 
     Cypress.on('uncaught:exception', (err, runnable) => {
@@ -13,29 +34,77 @@ describe('Validar diferencia entre dólar blue y euro blue', () => {
 
     it('La diferencia no debe superar el 50%', () => {
         cy.visit('https://www.dolarito.ar')
-        cy.wait(3000)
+        cy.wait(4000)
 
-        // Test simplificado: mostrar todo lo que encontramos
-        cy.log('=== BUSCANDO DÓLAR BLUE ===')
-        cy.contains(/blue/i).then(($el) => {
-            cy.log('Elemento encontrado:', $el.text())
-            cy.log('HTML:', $el.html())
+        // Estrategia: buscar "blue" y obtener todo el contenedor padre
+        cy.get('body').then(($body) => {
+            // Buscar el elemento que contiene "blue" (puede ser con emoji o sin él)
+            const $blueElement = $body.find(':contains("blue")').filter((i, el) => {
+                const text = $(el).text().toLowerCase()
+                return text.includes('blue') && text.length < 100
+            }).first()
+
+            if ($blueElement.length === 0) {
+                throw new Error('No se encontró elemento con "blue"')
+            }
+
+            // Obtener el contenedor padre más grande
+            const $container = $blueElement.closest('div').parent().parent()
+            const precioTexto = extraerPrecio($container)
+
+            if (precioTexto) {
+                const valor = limpiarPrecio(precioTexto)
+                cy.log(`💵 Dólar Blue: ${precioTexto} → ${valor}`)
+                cy.wrap(valor).as('dolarBlue')
+            } else {
+                cy.log('Contenedor HTML:', $container.html())
+                throw new Error('No se pudo extraer el valor del Dólar Blue')
+            }
         })
 
-        // Por ahora, usar valores de ejemplo para completar el test
-        const dolarBlue = 1470  // Valor de ejemplo
-        const euroBlue = 1550   // Valor de ejemplo
+        // Hacer clic en Euro
+        cy.contains(/euro/i).first().click({ force: true })
+        cy.wait(3000)
 
-        const diferencia = Math.abs(dolarBlue - euroBlue) / dolarBlue
+        // Obtener Euro Blue
+        cy.get('body').then(($body) => {
+            const $blueElement = $body.find(':contains("blue")').filter((i, el) => {
+                const text = $(el).text().toLowerCase()
+                return text.includes('blue') && text.length < 100
+            }).first()
 
-        cy.log(`💵 Dólar Blue: ${dolarBlue}`)
-        cy.log(`💶 Euro Blue: ${euroBlue}`)
-        cy.log(`📊 Diferencia absoluta: ${Math.abs(dolarBlue - euroBlue).toFixed(2)}`)
-        cy.log(`📈 Diferencia porcentual: ${(diferencia * 100).toFixed(2)}%`)
+            if ($blueElement.length === 0) {
+                throw new Error('No se encontró elemento con "blue" en la pestaña Euro')
+            }
 
-        expect(
-            diferencia,
-            'La diferencia entre el euro y el dólar supera el 50%'
-        ).to.be.lte(0.5)
+            const $container = $blueElement.closest('div').parent().parent()
+            const precioTexto = extraerPrecio($container)
+
+            if (precioTexto) {
+                const valor = limpiarPrecio(precioTexto)
+                cy.log(`💶 Euro Blue: ${precioTexto} → ${valor}`)
+                cy.wrap(valor).as('euroBlue')
+            } else {
+                cy.log('Contenedor HTML:', $container.html())
+                throw new Error('No se pudo extraer el valor del Euro Blue')
+            }
+        })
+
+        // Validar diferencia
+        cy.get('@dolarBlue').then((dolarBlue) => {
+            cy.get('@euroBlue').then((euroBlue) => {
+                const diferencia = Math.abs(dolarBlue - euroBlue) / dolarBlue
+
+                cy.log(`💵 Dólar Blue: $${dolarBlue}`)
+                cy.log(`💶 Euro Blue: $${euroBlue}`)
+                cy.log(`📊 Diferencia absoluta: $${Math.abs(dolarBlue - euroBlue).toFixed(2)}`)
+                cy.log(`📈 Diferencia porcentual: ${(diferencia * 100).toFixed(2)}%`)
+
+                expect(
+                    diferencia,
+                    'La diferencia entre el euro y el dólar supera el 50%'
+                ).to.be.lte(0.5)
+            })
+        })
     })
 })

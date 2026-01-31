@@ -1,0 +1,14 @@
+# Comandos para subir el proyecto a GitHub
+
+# 1. Conectar con el repositorio remoto (reemplaza TU_USUARIO con tu usuario de GitHub)
+git remote add origin https://github.com/TU_USUARIO/dolarito-tests.git
+
+# 2. Verificar que el remote se agregó correctamente
+git remote -v
+
+# 3. Subir el código a GitHub
+git push -u origin master
+
+# Nota: Si tu rama principal se llama 'main' en lugar de 'master', usa:
+# git branch -M main
+# git push -u origin main

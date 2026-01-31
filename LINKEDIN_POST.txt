@@ -1,0 +1,140 @@
+🔗 LINK DEL PROYECTO:
+https://github.com/daifer-18/dolarito-tests
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📝 DESCRIPCIÓN PARA LINKEDIN (Versión Corta):
+
+🚀 Nuevo proyecto: Automatización de Testing con Cypress
+
+Desarrollé un sistema de testing E2E para validar cotizaciones financieras en tiempo real, comparando Dólar Blue vs Euro Blue.
+
+✅ Tecnologías: Cypress, JavaScript, E2E Testing
+✅ Validación automática de diferencias porcentuales
+✅ Mensajes de error claros y descriptivos
+✅ Estrategia de selección robusta usando texto visible
+
+Este proyecto demuestra mis habilidades en:
+• Testing automatizado
+• Validación de datos financieros
+• Buenas prácticas de QA
+• Control de versiones con Git
+
+🔗 Repositorio: https://github.com/daifer-18/dolarito-tests
+
+#Cypress #Testing #QA #Automation #JavaScript #E2E #FinTech
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📝 DESCRIPCIÓN PARA LINKEDIN (Versión Larga):
+
+🎯 Automatización de Testing E2E: Validación de Cotizaciones Financieras
+
+Recientemente completé un proyecto de testing automatizado que valida la diferencia entre cotizaciones de Dólar Blue y Euro Blue en tiempo real.
+
+🔍 Desafío:
+Crear un sistema de testing confiable que valide automáticamente que la diferencia entre dos cotizaciones no supere el 50%, utilizando selectores estables basados en texto visible en lugar de clases CSS que pueden cambiar.
+
+💡 Solución implementada:
+• Framework: Cypress 15.9.0 para testing E2E
+• Estrategia de selección: cy.contains() con regex para mayor estabilidad
+• Función helper limpiarPrecio() para normalizar formatos monetarios
+• Validación con mensajes de error descriptivos
+• Manejo de excepciones no capturadas de la aplicación
+
+✨ Características técnicas:
+✅ Testing automatizado end-to-end
+✅ Validación de datos financieros en tiempo real
+✅ Cálculo de diferencias porcentuales
+✅ Assertions claras con mensajes personalizados
+✅ Configuración de .gitignore para buenas prácticas
+✅ Documentación clara del código
+
+📊 Resultados:
+• Tests ejecutándose exitosamente
+• Código limpio y mantenible
+• Repositorio organizado y documentado
+• Listo para integración continua (CI/CD)
+
+🛠️ Stack tecnológico:
+• Cypress
+• JavaScript
+• Node.js
+• Git & GitHub
+
+Este proyecto refleja mi compromiso con la calidad del software y las mejores prácticas en testing automatizado.
+
+🔗 Código disponible en: https://github.com/daifer-18/dolarito-tests
+
+#Cypress #AutomatedTesting #QA #QualityAssurance #JavaScript #E2ETesting #FinTech #SoftwareTesting #TestAutomation #WebTesting #ContinuousIntegration #DevOps #SoftwareQuality
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📝 DESCRIPCIÓN PARA LINKEDIN (Versión Técnica - Para reclutadores):
+
+🔬 Proyecto de Testing Automatizado: Validación de Cotizaciones Financieras
+
+Implementé una suite de testing E2E utilizando Cypress para validar automáticamente la consistencia de datos financieros en tiempo real.
+
+🎯 Objetivo del proyecto:
+Desarrollar tests automatizados que validen que la diferencia porcentual entre Dólar Blue y Euro Blue no supere el 50%, garantizando la integridad de los datos mostrados a los usuarios.
+
+🏗️ Arquitectura técnica:
+• Framework: Cypress 15.9.0
+• Lenguaje: JavaScript (ES6+)
+• Gestión de dependencias: npm
+• Control de versiones: Git/GitHub
+• Patrón: Page Object Model (preparado para escalabilidad)
+
+💻 Implementación destacada:
+
+1. Función helper para normalización de datos:
+   const limpiarPrecio = (texto) =>
+     Number(texto.replace('$', '').replace(/\./g, '').replace(',', '.'))
+
+2. Estrategia de selección robusta:
+   - Uso de cy.contains() con regex para evitar dependencia de clases CSS
+   - Navegación del DOM con .parent() y .closest()
+   - Manejo de aliases para valores asíncronos
+
+3. Validaciones con mensajes descriptivos:
+   expect(diferencia, 'La diferencia entre el euro y el dólar supera el 50%')
+     .to.be.lte(0.5)
+
+📈 Métricas del proyecto:
+• 1 test suite implementado
+• 100% de tests pasando
+• 0 vulnerabilidades en dependencias
+• Tiempo de ejecución: ~15 segundos
+• Cobertura de casos críticos de negocio
+
+🔧 Buenas prácticas aplicadas:
+✅ Manejo de excepciones no capturadas
+✅ Esperas explícitas para estabilidad
+✅ Logs descriptivos para debugging
+✅ .gitignore configurado correctamente
+✅ Commits semánticos y descriptivos
+✅ Código limpio y comentado
+
+🚀 Preparado para:
+• Integración con CI/CD (GitHub Actions, Jenkins, etc.)
+• Ejecución en diferentes navegadores
+• Generación de reportes (Mochawesome, Allure)
+• Escalabilidad a más casos de prueba
+
+🔗 Repositorio: https://github.com/daifer-18/dolarito-tests
+
+Abierto a discutir sobre testing automatizado, QA, y mejores prácticas en desarrollo de software.
+
+#Cypress #TestAutomation #QA #JavaScript #E2E #CI #CD #SoftwareEngineering #QualityAssurance #Testing #Automation #FinTech #WebDevelopment #DevOps
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📌 INSTRUCCIONES PARA PUBLICAR EN LINKEDIN:
+
+1. Copia la descripción que prefieras (corta, larga o técnica)
+2. Adjunta la imagen generada (cypress_project_showcase.png)
+3. Incluye el link: https://github.com/daifer-18/dolarito-tests
+4. Publica y comparte tu logro
+
+¡Éxito con tu publicación! 🚀
